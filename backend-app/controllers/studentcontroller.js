@@ -3,7 +3,7 @@ exports.addStudent=(req,res)=>{
  console.log(req.body);
  Student.create(req.body)
  .then((std)=>{
-    console.log({std});
+    console.log(std);
     res.json({
         message:"succesfully added student data",std
     })

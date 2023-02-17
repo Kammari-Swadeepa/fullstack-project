@@ -1,19 +1,51 @@
+import { useState } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Createstudent from "./Createstudent";
 import Studentlist from "./Studentlist";
+import "./App.css"
 
 
 function App() {
+  var [adminAccess,setAdminAccess]=useState(false);
+
+  var loginPage=()=>{
+    var username=document.getElementById("adminname").value;
+    var password=document.getElementById("adminpassword").value;
+    
+    if(username=="anshivi"  && password=="anshi12"){
+      setAdminAccess(true)
+    }
+    else{
+      document.getElementById("errorMsg").innerHTML="Invalid username and password"
+    }
+
+  }
   return (
-    <div>
-      <BrowserRouter>
-      <Link to="/addstudent"><button>ADD Student</button></Link>
-      <Link to="/students"><button>GET Students</button></Link>
-      <Routes>
-        <Route path="/addstudent" element={<Createstudent></Createstudent>}></Route>
-        <Route path="/students" element={<Studentlist></Studentlist>}></Route>
-      </Routes>
-      </BrowserRouter>
+    <div className="firstPage" >
+     
+      {adminAccess?"":<div ><div className="loginForm">
+        <table>
+          <tr><th>Name:</th><td><input type="text" name="adminname" placeholder="enter username"  id="adminname" ></input></td></tr>
+          <tr><th>Password:</th><td><input type="text" name="adminpassword" placeholder="enter password"  id="adminpassword" ></input></td></tr>
+          <tr><button onClick={loginPage}>Login</button></tr>
+          <tr> </tr>
+        </table>
+       
+      </div>
+      <div id="errorMsg"></div></div>}
+
+      {adminAccess?
+       <div className="routePage"><BrowserRouter>
+       <Link to="/addstudent" className="routeButtons"><button>ADD Student</button></Link>
+       <Link to="/students" className="routeButtons"><button>GET Students</button></Link>
+       <Routes>
+         <Route path="/addstudent" element={<Createstudent></Createstudent>}></Route>
+         <Route path="/students" element={<Studentlist></Studentlist>}></Route>
+       </Routes>
+       </BrowserRouter>
+       </div>
+      :""}
+      
 
     </div>
   );
