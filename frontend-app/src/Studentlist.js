@@ -7,14 +7,14 @@ function Studentlist() {
     var [list,setList]=useState([])
     var [modal,setModal]=useState(false);
     var [stdId,setStdId]=useState("")
+    var [immediate,setImmediate]=useState(false);
     useEffect(()=>{
         axios.get("http://localhost:5000/api/student")
         .then((res)=>{
          console.log(res.data);
          setList(res.data);
         })
-
-    },)
+},[immediate])
  
   var updateBtn=(e)=>{
        setStdId(e.target.name)
@@ -26,12 +26,14 @@ function Studentlist() {
     .then(()=>{  })
     console.log("In update submit");
     setModal(false)
+    setImmediate(!immediate)
   //  setStdId("")
 
   }
   var closeUpdateForm =()=>{
     setModal(false)
     setStdId('')
+    
   }
   var handleChange=(e)=>{
     //  e.preventDefault();
@@ -40,6 +42,7 @@ function Studentlist() {
      var deleteBtn=(e)=>{
 axios.delete(`http://localhost:5000/api/student/${e.target.name}`,)
 .then(()=>{
+  setImmediate(!immediate)
 
 })
      }
@@ -84,9 +87,7 @@ axios.delete(`http://localhost:5000/api/student/${e.target.name}`,)
 :""
 
 }
-         
-
-       </div>
+         </div>
     )
 }
 export default Studentlist;
