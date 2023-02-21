@@ -63,4 +63,19 @@ exports.deleteStudent=(req,res)=>{
             })
        })
 }
+exports.getOneStudent=(req,res)=>{
+  Student.findById(req.params.id)
+  .then((std)=>{
+      console.log(std);
+      res.json(std)
+  })
+  .catch((err)=>{
+      console.log("unable to find student data");
+      res.json({
+        message:"unable to find student data"
+      })
+ })
+
+}
+
 

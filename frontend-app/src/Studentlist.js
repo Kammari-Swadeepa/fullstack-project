@@ -15,28 +15,48 @@ function Studentlist() {
          setList(res.data);
         })
 },[immediate])
+var singleStudent=()=>{
+  console.log(" in singleStudent function with",stdId);
+  
+  axios.get(`http://localhost:5000/api/student/${stdId}`)
+  .then((res)=>{
+    console.log(res.data);
+      setStd(res.data)})
+}
  
   var updateBtn=(e)=>{
-       setStdId(e.target.name)
-       setModal(true)
+    e.preventDefault();
+    setStdId(e.target.name)
+    console.log(" std id "+ stdId+" event target = "+e.target.name);
+    
+  axios.get(`http://localhost:5000/api/student/${e.target.name}`)
+  .then((res)=>{
+    console.log(res.data);
+      setStd(res.data);
+      setImmediate(!immediate) 
+      }
+      )
+       
+       setModal(true);
+       setStd({name_:"",place_:"",class_:""})
+       
+
   }
   var updateStudent=(e)=>{
     e.preventDefault();
     axios.put(`http://localhost:5000/api/student/${stdId}`,std)
     .then(()=>{  })
     console.log("In update submit");
-    setModal(false)
     setImmediate(!immediate)
-  //  setStdId("")
-
-  }
+    setStdId("")
+    setModal(false)
+   }
   var closeUpdateForm =()=>{
     setModal(false)
     setStdId('')
-    
   }
   var handleChange=(e)=>{
-    //  e.preventDefault();
+      e.preventDefault();
       setStd((data)=>({...data,[e.target.name]:e.target.value}))
      }
      var deleteBtn=(e)=>{
@@ -45,6 +65,8 @@ axios.delete(`http://localhost:5000/api/student/${e.target.name}`,)
   setImmediate(!immediate)
 
 })
+
+
      }
    return(
         <div>
