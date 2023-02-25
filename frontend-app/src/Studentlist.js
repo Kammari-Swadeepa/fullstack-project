@@ -78,8 +78,8 @@ axios.delete(`http://localhost:5000/api/student/${e.target.name}`,)
                 <p>Name:{s.name_}</p>
                 <p>Place:{s.place_}</p>
                 <p>Class:{s.class_}</p>
-                <button className="btn btn-warning" name={s._id}  onClick={updateBtn}>update</button>
-                <button className="btn btn-danger" name={s._id} onClick={deleteBtn}>delete</button>
+                <button className="btn btn-warning btn2" name={s._id}  onClick={updateBtn}>update</button>
+                <button className="btn btn-danger btn2" name={s._id} onClick={deleteBtn}>delete</button>
             </div>
             </div>})}
           </div>

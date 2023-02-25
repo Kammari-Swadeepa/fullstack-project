@@ -18,8 +18,9 @@ function Createstudent() {
  }
 return(
         <div>
+            <h3 className="h3">Add new student info</h3>
            
-       {/* <h1>adding new student data</h1> */}
+      
        <div className="createForm">
        <form onSubmit={afterSubmit}>
         <table>

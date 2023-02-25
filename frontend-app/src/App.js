@@ -22,8 +22,7 @@ function App() {
   }
   return (
     <div className="firstPage" >
-     
-      {adminAccess?"":<div ><div className="loginForm">
+      {adminAccess?"":<div><h3 id="h3">Enter valid username and password to login</h3><div className="loginForm">
         <table>
           <tr><th>Name:</th><td><input type="text" name="adminname" placeholder="enter username"  id="adminname" ></input></td></tr>
           <tr><th>Password:</th><td><input type="text" name="adminpassword" placeholder="enter password"  id="adminpassword" ></input></td></tr>
@@ -36,8 +35,9 @@ function App() {
 
       {adminAccess?
        <div className="routePage"><BrowserRouter>
-       <Link to="/addstudent" className="routeButtons"><button>ADD Student</button></Link>
-       <Link to="/students" className="routeButtons"><button>GET Students</button></Link>
+       <Link to="/addstudent" className="routeButtons"><button className="btn1">ADD Student</button>
+       </Link>
+       <Link to="/students" className="routeButtons"><button className="btn1">GET Students</button></Link>
        <Routes>
          <Route path="/addstudent" element={<Createstudent></Createstudent>}></Route>
          <Route path="/students" element={<Studentlist></Studentlist>}></Route>
